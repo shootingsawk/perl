@@ -71,6 +71,14 @@ print "\ntest CVE-2015-1635 (MS15-034) :\n";
 system("wget -O - --header=\"Range: 0-18446744073709551615\" http://$server/iisstart.htm");
 
 #-----------------------------------------------------------
+# test WebDAV
+#-----------------------------------------------------------
+#system("curl -X PROPFIND -H \"Content-Type: text/xml\" http://USER:PASSWORD@HOST/webdav/FOLDER | xmllint --format -");
+print "\ntest WebDAV :\n";
+print "\n-------------\n";
+system("curl -X PROPFIND -H \"Content-Type: text/xml\" -H \"Depth: 1\" http://$server/webdav | xml_pp");
+
+#-----------------------------------------------------------
 # testURL() - fires URL at server, gets response code and
 #             content (which can be saved for examination)
 #-----------------------------------------------------------
