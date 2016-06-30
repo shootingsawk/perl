@@ -32,6 +32,9 @@ my %urls = ("IDC" => "/*.idc",
       "copy_83" => "/copyof~1/",
       "docume_83" => "/docume~1/",
       "javasc_83" => "/javasc~1/",
+      "ecp" => "/ecp/",
+      "owa" => "/owa/",
+      "powershell" => "/powershell",
       "cgi-bin" => "/cgi-bin");
 
 if (isIIS($server)) {
