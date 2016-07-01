@@ -7,6 +7,10 @@ my $code;
 my $server = shift || die "Must enter a server.\n";
 
 my %urls = ("IDC" => "/*.idc",
+      "ecp" => "/ecp/",
+      "owa" => "/owa/",
+      "powershell" => "/powershell",
+      "autodiscover" => "/autodiscover/autodiscover.xml",
       "Site Server 2.0 Repost" => "/scripts/repost.asp",
       "Site Server 3.0" => "/msadc/Samples/SELECTOR/showcode.asp",
       "FPCount" => "/_vti_bin/fpcount.exe?Page=default.htm|Image=3|Digits=15",
@@ -32,9 +36,6 @@ my %urls = ("IDC" => "/*.idc",
       "copy_83" => "/copyof~1/",
       "docume_83" => "/docume~1/",
       "javasc_83" => "/javasc~1/",
-      "ecp" => "/ecp/",
-      "owa" => "/owa/",
-      "powershell" => "/powershell",
       "cgi-bin" => "/cgi-bin");
 
 if (isIIS($server)) {
