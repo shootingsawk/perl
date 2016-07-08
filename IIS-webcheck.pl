@@ -54,7 +54,7 @@ my %urls = ("IDC" => "/*.idc",
       "copy_83" => "/copyof~1/",
       "docume_83" => "/docume~1/",
       "javasc_83" => "/javasc~1/",
-      "cgi-bin" => "/cgi-bin"),
+      "cgi-bin" => "/cgi-bin",
       "manager-html" => "/manager/html/",
       "jmx-console" => "/jmx-console/",
       "CFIDE-login" => "/CFIDE/administrator/login.cfm");
