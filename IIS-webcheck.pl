@@ -2,6 +2,8 @@
 
 use strict;
 use LWP::UserAgent;
+use Crypt::SSLeay;
+
 my $code;
 
 my $server = shift || die "Must enter a server.\n";
@@ -77,11 +79,13 @@ sub isIIS {
  my($server) = @_;
  my $ua = new LWP::UserAgent;
  $ua->agent("IISBolom/0.1 ".$ua->agent);
- my $srv = "http://$server";
+ $ua->protocols_allowed( [ 'http', 'https'] );
+ my $srv = "https://$server";
  my $req = new HTTP::Request Get => $srv;
  my $res = $ua->request($req);
  my $web = $res->server;
- (grep(/Microsoft-IIS/i,$web)) ? (return 1) : (return 0);
+# (grep(/Microsoft-IIS/i,$web)) ? (return 1) : (return 0);
+ (grep(/IIS/i,$web)) ? (return 1) : (return 0);
 }
 
 #-----------------------------------------------------------
@@ -93,7 +97,7 @@ sub isIIS {
 # system may still be vulnerable.
 #-----------------------------------------------------------
 print "\ntest CVE-2015-1635 (MS15-034) :\n";
-system("wget -O - --header=\"Range: 0-18446744073709551615\" http://$server/iisstart.htm");
+system("wget -O - --header=\"Range: 0-18446744073709551615\" https://$server/iisstart.htm");
 
 #-----------------------------------------------------------
 # test WebDAV
@@ -101,7 +105,7 @@ system("wget -O - --header=\"Range: 0-18446744073709551615\" http://$server/iiss
 #system("curl -X PROPFIND -H \"Content-Type: text/xml\" http://USER:PASSWORD@HOST/webdav/FOLDER | xmllint --format -");
 print "\ntest WebDAV :\n";
 print "\n-------------\n";
-system("curl -X PROPFIND -H \"Content-Type: text/xml\" -H \"Depth: 1\" http://$server/webdav | xml_pp");
+system("curl -X PROPFIND -H \"Content-Type: text/xml\" -H \"Depth: 1\" https://$server/webdav | xml_pp");
 
 #-----------------------------------------------------------
 # testURL() - fires URL at server, gets response code and
@@ -112,7 +116,8 @@ sub testURL {
  my $code;
  my $ua = new LWP::UserAgent;
  $ua->agent("IISBolom/0.1 ".$ua->agent);
- my $srv = "http://$server".$url;
+ $ua->protocols_allowed( [ 'http','https'] );
+ my $srv = "https://$server".$url;
  my $req = new HTTP::Request Get => $srv;
  my $res = $ua->request($req);
  $code = $res->code;
