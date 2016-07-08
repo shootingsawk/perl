@@ -55,8 +55,8 @@ my %urls = ("IDC" => "/*.idc",
       "docume_83" => "/docume~1/",
       "javasc_83" => "/javasc~1/",
       "cgi-bin" => "/cgi-bin"),
-      "manager-html" => "/manager/html/"),
-      "jmx-console" => "/jmx-console/"),
+      "manager-html" => "/manager/html/",
+      "jmx-console" => "/jmx-console/",
       "CFIDE-login" => "/CFIDE/administrator/login.cfm");
 
 if (isIIS($server)) {
